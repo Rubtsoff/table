@@ -1,17 +1,17 @@
 import React from 'react';
+
+import { Loader } from "./components";
+import { useGetUsersQuery} from "./store/reducers/users";
+import UsersTable from "./components/UsersTable/UsersTable";
+
 import './App.css';
-import {useGetUsersQuery} from "./store/reducers/users";
-import {Loader} from "./components";
-import Table from "./components/Table/Table";
 
 function App() {
   const {
     data: usersData,
     isLoading: isUsersLoading,
     isSuccess: isUsersSuccess,
-    isError: isUsersError,
   } = useGetUsersQuery();
-  console.log("usersData", usersData);
 
   const getUsersTable = () => {
     if (isUsersLoading) {
@@ -20,9 +20,9 @@ function App() {
       )
     }
 
-    if (isUsersSuccess && usersData?.length) {
+    if (isUsersSuccess) {
       return (
-        <Table users={usersData} />
+        <UsersTable users={usersData} />
       )
     }
   }

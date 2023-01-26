@@ -1,15 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+
 import App from './App';
 import { Provider } from "react-redux";
 import { setupStore } from "./store/store";
+import { GlobalModalProvider } from "./components";
+
+import './index.css';
 
 export const store = setupStore();
-
-// Infer the `RootState` and `AppDispatch` types from the store itself
-export type RootState = ReturnType<typeof store.getState>
-export type AppDispatch = typeof store.dispatch
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -18,7 +17,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <GlobalModalProvider>
+        <App />
+      </GlobalModalProvider>
     </Provider>
   </React.StrictMode>
 );

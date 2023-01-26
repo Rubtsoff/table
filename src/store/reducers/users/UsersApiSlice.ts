@@ -17,7 +17,7 @@ export const usersApiSlice = apiSlice
         keepUnusedDataFor: 240,
         providesTags: () => [entityTag],
       }),
-      addUser: builder.mutation<{ id: number }, IUser>({
+      addUser: builder.mutation<{ id: number, newUser: Partial<IUser> }, Partial<IUser>>({
         query: ({ name, about, age }) => ({
           url: baseUsersUrl,
           method: "POST",
@@ -53,6 +53,7 @@ export const usersApiSlice = apiSlice
 
 export const {
   useGetUsersQuery,
+  useAddUserMutation,
   useDeleteUserMutation,
   useChangeUserMutation,
 } = usersApiSlice;
